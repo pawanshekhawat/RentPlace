@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
+<% layout("/layouts/boilerplate.ejs") %>
 <body>
     <h3>Edit your Listing</h3>
     <form method="POST" action="/listings/<%=listing._id%>?_method=PUT">
@@ -26,5 +18,3 @@
         <button>Update</button>
     </form>
 </body>
-
-</html>

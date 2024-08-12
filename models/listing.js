@@ -11,8 +11,8 @@ const listingSchema = new Schema({
         default: "",
     },
     image: {
-        filename: { type: String },
-        url: { type: String },
+        type: String,
+        default: "/img/Image_not_available.png",
     },
     price: {
         type: Number,

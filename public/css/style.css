@@ -104,9 +104,9 @@ body {
 
 
 /* Show Page */
-/* .show-image {
-    height: 0vh;
-}    */
+.show-image {
+    height: 40vh;
+}   
 
 .show-btns {
     display: flex;

@@ -13,6 +13,7 @@ const listingSchema = new Schema({
     image: {
         type: String,
         default: "/img/Image_not_available.png",
+        set: (v) => v === "" ? "/img/Image_not_available.png" : v,
     },
     price: {
         type: Number,

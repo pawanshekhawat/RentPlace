@@ -1,33 +1,67 @@
 <% layout("/layouts/boilerplate.ejs") %>
-<div class="row mt-3">
-    <div class="col-8 offset-2">
-        <h3>Listing Details: </h3>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3>
+                <%= listing.title %>
+            </h3>
+        </div>
+
+        <div class="card listing-card col-8 offset-2 show-card">
+            <!-- Image with fallback -->
+            <img class="card-img-top show-image" src="<%= listing.image %>" alt="listing_image">
+            <div class="card-body">
+                <p class="card-text">
+                    <%= listing.description %><br>
+                    &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "0" %> / night<br>
+                    <%= listing.location %><br>
+                    <%= listing.country %>
+                </p>
+            </div>
+        </div>
+        <br>
     </div>
 
-    <div class="card col-8 offset-2 show-card">
-        <!-- Image with fallback -->
-        <img class="card-img-top show-image" src="<%= listing.image %>" alt="listing_image">
-        <div class="card-body">
-            <p class="card-text">
-                <!-- Title with fallback -->
-                <b><%= listing.title || "No Title Available" %></b><br>
-                <!-- Description with fallback -->
-                <%= listing.description || "No Description Available" %><br>
-                <!-- Price with fallback -->
-                &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "0" %> / night<br>
-                <!-- Location with fallback -->
-                <%= listing.location || "No Location Provided" %><br>
-                <!-- Country with fallback -->
-                <%= listing.country || "Country Not Specified" %>
-            </p>
+
+    <div class="show-btns mb-4">
+        <a href="/listings/<%= listing.id %>/edit" class="btn btn-dark col-1 offset-2 edit-btn">Edit</a>
+        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
+            <button class="btn btn-dark offset-5">Delete</button>
+        </form>
+    </div>
+
+    <div class="col-8 offset-2">
+        <hr>
+        <h4>Leave a Review</h4>
+        <form action="/listings/<%= listing._id  %>/reviews" method="POST" class="mb-3" novalidate
+            class="needs-validation">
+            <div class="m-2">
+                <label for="rating" class="form-label">Rating</label>
+                <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+            </div>
+            <div class="m-2">
+                <label for="comment" class="form-label">Commment</label>
+                <textarea name="review[comment]" id="comment" cols="90" rows="4" class="form-control"
+                    required></textarea>
+                <div class="invalid-feedback">
+                    Please add some comment for review
+                </div>
+            </div>
+            <button class="btn btn-outline-dark m-2">Submit</button>
+        </form>
+        <hr>
+        <p><b>All Reviews</b></p>
+        <div class="row">
+        <% for(review of listing.reviews) {  %>
+            <div class="card col-5 m-2 p-2">
+                <div class="card-body">
+                    <div class="card-title">Jane Doe</div>
+                    <p class="card-text"><%= review.comment %></p>
+                    <p class="card-text"><%= review.rating %> starts</p>
+                </div>
+                <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-dark mt-2">Delete Review</button>
+                </form>
+            </div>
+        <% } %>
         </div>
     </div>
-    <br>
-</div>
-
-<div class="show-btns mb-4">
-    <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-2 edit-btn">Edit</a>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button class="btn btn-dark offset-5">Delete</button>
-    </form>
-</div>

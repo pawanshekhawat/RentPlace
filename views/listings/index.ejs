@@ -4,7 +4,7 @@
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 justify-content-around">
     <% for(let listing of allListing) { %>
         <a href="/listings/<%= listing._id %>" class="listing-link">
-            <div class="card" style="width: 20rem;">
+            <div class="card listing-card" style="width: 20rem;">
                 <img class="card-img-top" src="<%= listing.image %>" alt="listing_img" style="height: 20rem;">
                 
                 <div class="card-img-overlay"></div>

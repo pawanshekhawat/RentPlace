@@ -57,7 +57,7 @@ body {
 }
 
 /* Index Cards */
-.card {
+.listing-card {
     border: 0 !important;
     margin-bottom: 2rem;
 }
@@ -115,4 +115,8 @@ body {
 .show-card {
     padding-left: 0;
     padding-right: 0;
+}
+
+.form-range {
+    width: 100%;
 }

@@ -12,9 +12,8 @@ const listingSchema = new Schema({
         default: "",
     },
     image: {
-        type: String,
-        default: "/img/Image_not_available.png",
-        set: (v) => v === "" ? "/img/Image_not_available.png" : v,
+        url: String,
+        filename: String,
     },
     price: {
         type: Number,
@@ -36,6 +35,10 @@ const listingSchema = new Schema({
     owner:{
         type: Schema.Types.ObjectId,
         ref: "User",
+    },
+    category: {
+        type: String,
+        enum: ["Mountains", "Arctic", "Rooms", "Iconic Cities", "Castles", "Swimming Pools", "Camping", "Farms", "Igloo", "Dungeon", "Beachfront", "Urban", "Historic", "Unique", "Luxury", "Safari"]
     }
 });
 

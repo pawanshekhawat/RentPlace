@@ -9,9 +9,14 @@ body {
     flex: 1 !important;
 }
 
+/* Navbar */
 .navbar {
     padding: 0px 20px !important;
     height: 5rem;
+    background-color: #fff;
+}
+
+.navbar-collapse {
     background-color: #fff;
 }
 
@@ -24,6 +29,30 @@ body {
     color: #222 !important;
 }
 
+.search-btn {
+    background-color: #FE424D !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    border-radius: 25px !important;
+    padding: 0 1.5rem !important;
+}
+
+.search-btn:hover {
+    border-color: #FE424D !important;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.search-btn i {
+    display: inline !important;
+    margin-right: 0.3rem !important;
+}
+
+.search-input {
+    border-radius: 25px !important;
+    padding: 0.5rem 3rem 0.5rem 1rem !important;
+    font-size: 0.9rem !important;
+}
 
 /* Footer */
 .f-info-links a {
@@ -78,6 +107,7 @@ body {
 }
 
 .listing-link {
+    width: 340px !important;
     text-decoration: none !important;
 }
 
@@ -107,7 +137,7 @@ body {
 /* Show Page */
 .show-image {
     height: 40vh;
-}   
+}
 
 .show-btns {
     display: flex;
@@ -120,4 +150,72 @@ body {
 
 .form-range {
     width: 100%;
+}
+
+/* Map */
+
+#map {
+    height: 60vh;
+    width: 50vw;
+}
+
+/* TabBar */
+.tabbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#filters {
+    display: flex;
+    overflow-x: scroll;
+}
+
+#filters::-webkit-scrollbar {
+    display: none;
+}
+
+.filter {
+    width: max-content;
+    text-align: center;
+    margin-right: 3rem;
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+.filter:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.filter-icon i {
+    font-size: 20px;
+}
+
+.filter p {
+    font-size: 0.7rem;
+}
+
+.tax-info {
+    visibility: hidden;
+}
+
+.form-switch {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.tax-toggle {
+    border: 1px solid #000;
+    padding: 7px 20px;
+    border-radius: 10px;
+}
+
+.tax-toggle label {
+    font-size: 0.9rem;
+}
+
+.hidden {
+    visibility: hidden !important;
 }

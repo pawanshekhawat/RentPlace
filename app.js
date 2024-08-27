@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -6,6 +10,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -15,7 +20,7 @@ const listingsRouter = require("./routes/listingRouter");
 const reviewsRouter = require("./routes/reviewRouter");
 const userRouter = require("./routes/userRouter");
 
-const MONGO_URL = "mongodb+srv://pawanshekhawat2402:57Qs3iUB723WcO5R@cluster0.inibxa0.mongodb.net/rentplace?retryWrites=true&w=majority&tls=true";
+const MONGO_URL = process.env.ATLASDB_URL;
 
 async function main() {
     try {
@@ -36,7 +41,20 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+const store = MongoStore.create({
+    mongoUrl: MONGO_URL,
+    crypto: {
+        secret: "12345678"
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+    console.log("ERROR in MONGO SESSION STORE", err);
+});
+
 const sessionOptions = {
+    store,
     secret: "12345678",
     resave: false,
     saveUninitialized: true,
@@ -47,13 +65,15 @@ const sessionOptions = {
     }
 }
 
-app.get("/", (req,res) => {
-    res.send("Working");
-})
+// app.get("/", (req, res) => {
+//     res.send("Heloo");
+// })
+
+
 
 app.use(session(sessionOptions));
 app.use(flash());
-    
+
 // Passport.js configuration
 app.use(passport.initialize());
 app.use(passport.session());

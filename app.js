@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 const store = MongoStore.create({
     mongoUrl: MONGO_URL,
     crypto: {
-        secret: "12345678"
+        secret: process.env.SECRET,
     },
     touchAfter: 24 * 3600,
 });
@@ -55,7 +55,7 @@ store.on("error", () => {
 
 const sessionOptions = {
     store,
-    secret: "12345678",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -64,12 +64,6 @@ const sessionOptions = {
         httpOnly: true,
     }
 }
-
-// app.get("/", (req, res) => {
-//     res.send("Heloo");
-// })
-
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -100,7 +94,6 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
     res.status(statusCode).render("error.ejs", { message });
-    // res.status(statusCode).send(message);
 })
 
 app.listen(5000, () => {
